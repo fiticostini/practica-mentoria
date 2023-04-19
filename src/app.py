@@ -33,7 +33,7 @@ def handle_invalid_usage(error):
 
 users = [
     {"username": "enderya", "password": "any0571"},
-    {"username": "ferfan", "password": "ann0571"}
+    {"username": "daniel", "password": "ann0571"}
 ]
 
 
