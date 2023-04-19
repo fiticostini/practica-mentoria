@@ -31,6 +31,12 @@ setup_admin(app)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
+users = [
+    {"username": "enderya", "password": "any0571"},
+    {"username": "ferfan", "password": "ann0571"}
+]
+
+
 # generate sitemap with all your endpoints
 @app.route('/')
 def sitemap():
@@ -44,6 +50,25 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@app.route('/user/login', methods=['POST'])
+def user_login():
+    user_verify = False
+    body = request.json 
+    username = body.get("username", None)
+    password = body.get("password", None)
+    if username is None or password is None:
+        return jsonify({"msg": "faltan credenciales"}), 400
+    else:
+        for user in users: 
+            if user["password"] != password or user["username"] != username:
+                continue
+            else:     
+                user_verify = True 
+        if user_verify:
+            return jsonify("Usted es Bienvenido")
+        else:
+            return jsonify("Credenciales Invalidas")        
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
